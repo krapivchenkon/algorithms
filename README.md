@@ -1,8 +1,8 @@
 # algorithms
 Solutions for some algorithms
 
-add path to helper scripts:
-export PATH=<path-to-repo>/.helpers:$PATH
+add result of folowing command to your bash profile:
+echo "export PATH=$PWD/.helper:\$PATH"
 
 ## Test solution against tests:
 > run-tests.sh js|py|java
