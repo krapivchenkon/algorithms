@@ -17,12 +17,11 @@ $SCRNAME - Creates directory with templates for problem solution
 SYNOPSIS
 $SCRNAME [l] -n PROBLEMNAME 
 OPTIONS
--n|--name               - name -f the problem
+-n|--name               - name -f the problem [a-zA-Z0-9] and [_] are allowed 
 -l|--lang [py|java|js]  - specify language which will be used for solution
 Multiple -l options can be specified
-USAGE
 -   Create template dir for solving problem with python:
-> $SCRNAME -l py -n 001-multiplies-of-3-and-5
+> $SCRNAME -l py -n 001_multiplies_of_3_and_5
 will create directory with templates for py solutions
 -   Add Java solution template for current problem
 > $SCRNAME -l java .

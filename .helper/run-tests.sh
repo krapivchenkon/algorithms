@@ -12,6 +12,8 @@ LANG="py" # default language
 PY_SOLUTION="solution.py"
 JS_SOLUTION="solution.js"
 JAVA_SOLUTION="solution.java"
+JAVAC_SOLUTION="solution.class"
+JAVA_CLASS="solution"
 SUFIN=".in"
 SUFOUT=".out"
 SUFTMP=".tmp"
@@ -122,7 +124,8 @@ run_python(){
 }
 
 run_java(){
-    echo "Java"
+    CPATH=$(basename $PWD).$JAVA_CLASS
+    TET=$(cat $1$SUFIN |time -p java $CPATH 2>&1>$1$SUFTMP)
 }
 
 run_js(){
@@ -141,7 +144,9 @@ for test in ${TESTS[@]}; do
         run_python $test
         ;;
         java)
-        run_java
+        
+        [ -f $JAVAC_SOLUTION ] || { log_bold 3 "File should be compiled first"; javac $JAVA_SOLUTION; }
+        run_java $test
         ;;
         js)
         run_js
