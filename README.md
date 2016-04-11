@@ -9,8 +9,8 @@ echo "export PATH=$PWD/.helper:\$PATH"
 
 ### Create template directory for new problem
 - for single lang
-> create-dir.sh -n <name-of-problem> -l py
+$ create-dir.sh -n PROBLEM_NAME -l py
 - for multiple langs
-> create-dir.sh -n <name-of-problem> -l py -l js
+$ create-dir.sh -n PROBLEM_NAME -l py -l js
 
-Note that problem shouldn't contain illegal symbols for java packages("-")
+Note that problem shouldn't contain illegal symbols for java packages("-") and should start with [a-zA-Z]

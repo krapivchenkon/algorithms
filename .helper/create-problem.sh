@@ -33,28 +33,7 @@ exit 1
 if [[ $# -eq 0 ]]; then
     usage
 fi
-############################
-# README.md template
-############################
-read -d '' readme <<- EOF
-# Problem Name
----
 
-### Input Format 
-
-### Output Format 
-
-### Constraints
-
-### Sample Input
-```
-```
-### Sample Output
-```
-```
-### Explanation
-
-EOF
 ############################
 # log helpers
 ############################
@@ -127,6 +106,28 @@ done;
 
 
 }
+############################
+# README.md template
+############################
+read -d '' readme <<- EOF
+# $PROBLEM
+---
+
+### Input Format 
+
+### Constraints
+
+### Output Format 
+
+### Sample Input
+\`\`\`
+\`\`\`
+### Sample Output
+\`\`\`
+\`\`\`
+### Explanation
+
+EOF
 
 ############################
 # MAIN
