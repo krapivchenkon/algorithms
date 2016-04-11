@@ -115,8 +115,14 @@ for tmpl in $(find $REPO_DIR -name "template*");
 do
     filename=$(basename "$tmpl")
     EXT="${filename##*.}"
+    # eval "echo \"${template_str}\""
+    # [[ $? -eq 0 ]] && { log "Copying [$EXT] template"; export PRM="WEFWEFW"; cat $tmpl >$PROBLEM/$SOLUTION.$EXT; }
     contains $EXT
-    [[ $? -eq 0 ]] && { log "Copying [$EXT] template"; cp $tmpl $PROBLEM/$SOLUTION.$EXT; }
+    [[ $? -eq 0 ]] && { 
+        template_str=$(cat "${tmpl}")
+        log "Copying [$EXT] template";  
+        eval "echo \"${template_str}\" >$PROBLEM/$SOLUTION.$EXT"; 
+    }
 done;
 
 
@@ -134,6 +140,8 @@ else
     # create new dir
     log_bold 7 "Creating new directory: $PROBLEM"
     mkdir $PROBLEM
+    # Set Vars to be used in Solution templates
+
     # copy template for specified language
     copy_templates
 

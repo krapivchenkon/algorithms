@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+
 def solution():
    pass
 

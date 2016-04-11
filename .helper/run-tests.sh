@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
-# USAGE:
-# run-tests.sh  - will run all tests against python solution
-# run-tests.sh java test-1 - 
-#
-#
-#
-#
-#
+
 # 
 LANG="py" # default language
 PY_SOLUTION="solution.py"
@@ -125,7 +118,10 @@ run_python(){
 
 run_java(){
     CPATH=$(basename $PWD).$JAVA_CLASS
-    TET=$(cat $1$SUFIN |time -p java $CPATH 2>&1>$1$SUFTMP)
+    PROBLEM=$(basename $PWD)
+    cd ..
+    TET=$(cat $PROBLEM/$1$SUFIN |time -p java $CPATH 2>&1>$PROBLEM/$1$SUFTMP)
+    cd - 2>&1>/dev/null
 }
 
 run_js(){

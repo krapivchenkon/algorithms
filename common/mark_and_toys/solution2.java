@@ -1,4 +1,4 @@
-package mark_and_toys;
+//package mark_and_toys;
 
 public class solution2 {
 
