@@ -10,11 +10,12 @@ TT lines follow, each of which contains three integers, NN, CC, and MM.
 Print the total number of chocolates Bob eats.
 
 ## Constraints: 
+```
 1≤T≤10001≤T≤1000 
 2≤N≤1052≤N≤105 
 1≤C≤N1≤C≤N 
 2≤M≤N
-
+```
 
 ### Sample Input
 ```
