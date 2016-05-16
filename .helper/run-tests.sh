@@ -4,6 +4,7 @@
 LANG="py" # default language
 PY_SOLUTION="solution.py"
 JS_SOLUTION="solution.js"
+GO_SOLUTION="solution.go"
 JAVA_SOLUTION="solution.java"
 JAVAC_SOLUTION="solution.class"
 JAVA_CLASS="solution"
@@ -12,6 +13,7 @@ SUFOUT=".out"
 SUFTMP=".tmp"
 SCRNAME=$(basename $0)
 TET=""
+VERBOSE=0
 # TERMINAL settings
 bold=$(tput bold)
 sep="##############################################"
@@ -28,7 +30,7 @@ function usage(){
   cat <<USAGE
    $SCRNAME - Tests problem solution against tests
   SYNOPSIS
-   $SCRNAME [py|js|java] [options] [tests]
+   $SCRNAME [py|js|java|go] [options] [tests]
   OPTIONS
     -h--verbose--solution               show current information
 -   -v|--verbose       enable solution debug
@@ -55,7 +57,7 @@ do
 key="$1"
 
 case $key in
-    py|java|js)
+    py|java|js|go)
     LANG=$key
     ;;
     -s|--searchpath)
@@ -69,6 +71,12 @@ case $key in
     -D|--debug)
     # option
     DEBUG="ON"
+    # shift # past argument
+    ;;
+
+    -v|--verbose)
+    # option
+    VERBOSE=1
     # shift # past argument
     ;;
 
@@ -116,6 +124,10 @@ run_python(){
     TET=$(cat $1$SUFIN |time -p python $PY_SOLUTION 2>&1>$1$SUFTMP)
 }
 
+run_go(){
+    TET=$(cat $1$SUFIN |time -p go run $GO_SOLUTION 2>&1>$1$SUFTMP)
+}
+
 run_java(){
     CPATH=$(basename $PWD).$JAVA_CLASS
     PROBLEM=$(basename $PWD)
@@ -139,6 +151,10 @@ for test in ${TESTS[@]}; do
         # TET=$(run_python $test)
         run_python $test
         ;;
+       go)
+        # TET=$(run_python $test)
+        run_go $test
+        ;;
         java)
         
         [ -f $JAVAC_SOLUTION ] || { log_bold 3 "File should be compiled first"; javac $JAVA_SOLUTION; }
@@ -155,6 +171,21 @@ for test in ${TESTS[@]}; do
     diff_out=$(diff -ub $test$SUFOUT $test$SUFTMP)
     if [ "$?" -ne "0" ]; then
         log_bold 1 "$test FAILED"
+        if [ $VERBOSE == 1 ]; then
+          log_bold 1 "INPUT:"
+          echo "##############################################"
+          cat $test$SUFIN
+          echo "##############################################"
+          log_bold 1 "OUTPUT:"
+          echo "##############################################"
+          cat $test$SUFTMP
+          echo "##############################################"
+          log_bold 1 "EXPECTED OUTPUT:"
+          echo "##############################################"
+          cat $test$SUFOUT
+          echo "##############################################"
+
+        fi
     # as a bonus, make our script exit with the right error code.
     else
         log_bold 2 "$test PASSED"

@@ -18,7 +18,7 @@ SYNOPSIS
 $SCRNAME [l] -n PROBLEMNAME 
 OPTIONS
 -n|--name               - name -f the problem [a-zA-Z0-9] and [_] are allowed 
--l|--lang [py|java|js]  - specify language which will be used for solution
+-l|--lang [py|java|js|go]  - specify language which will be used for solution
 Multiple -l options can be specified
 -   Create template dir for solving problem with python:
 > $SCRNAME -l py -n 001_multiplies_of_3_and_5
