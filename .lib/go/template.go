@@ -1,13 +1,13 @@
 package main
 
 import (
-	"bufio"
-	"fmt"
-	"os"
-	"strconv"
+	\"bufio\"
+	\"fmt\"
+	\"os\"
+	\"strconv\"
 )
 
-// Helper function reads 2-dimensional matrix into slice of slices
+// HELPER: function reads 2-dimensional matrix into slice of slices
 func readMatrix(s *bufio.Scanner, arr [][]int32, N *int32) {
 	var row, ind int32 = -1, 0
 	for s.Scan() {
@@ -22,6 +22,18 @@ func readMatrix(s *bufio.Scanner, arr [][]int32, N *int32) {
 		arr[row] = append(arr[row], int32(i))
 	}
 
+}
+
+// HELPER: arr argument should be prealocated with make
+func readArray(s *bufio.Scanner, arr []int32, N *int32) {
+	for i := int32(0); i < *N && s.Scan(); i++ {
+		el, err := strconv.ParseInt(s.Text(), 10, 32)
+		if err != nil {
+			panic(err)
+		}
+		arr[i] = int32(el)
+	}
+	// fmt.Println("changed slice:", arr)
 }
 
 func main() {
