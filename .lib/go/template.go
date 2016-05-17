@@ -49,4 +49,11 @@ func main() {
 	var a, b, res uint32
 	fmt.Scanf("%v\n%v", &a, &b)
 
+	//SAMPLE
+	n, _ := strconv.ParseInt(scan.Text(), 10, 32)
+	var N int32 = int32(n)
+
+	arr := make([]int32, N)
+	readArray(scan, arr, &N)
+
 }
