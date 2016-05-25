@@ -166,7 +166,13 @@ for test in ${TESTS[@]}; do
         *)
         ;;
     esac
-    log "TET: [${TET}]"
+    if [ "$?" -ne "0" ]; then
+      log_bold 1 "COMPILATION FAILED"
+      echo "${TET}"  
+    else
+      log "TET: [${TET}]"
+    fi
+    
     # check if result is correct
     diff_out=$(diff -ub $test$SUFOUT $test$SUFTMP)
     if [ "$?" -ne "0" ]; then
