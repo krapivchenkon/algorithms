@@ -54,11 +54,7 @@ func main() {
 	//SAMPLE: read integer from stdin
 	N := int32(readInt(scan))
 
-
-	//SAMPLE
-	n, _ := strconv.ParseInt(scan.Text(), 10, 32)
-	var N int32 = int32(n)
-
+	//SAMPLE: read array from the input
 	arr := make([]int32, N)
 	readArray(scan, arr, &N)
 
