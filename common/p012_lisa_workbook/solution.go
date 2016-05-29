@@ -1,28 +1,11 @@
 package main
 
 import (
-	\"bufio\"
-	\"fmt\"
-	\"os\"
-	\"strconv\"
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
 )
-
-// HELPER: function reads 2-dimensional matrix into slice of slices
-func readMatrix(s *bufio.Scanner, arr [][]int32, N *int32) {
-	var row, ind int32 = -1, 0
-	for s.Scan() {
-		if ind%*N == 0 {
-			row++
-		}
-		ind++
-		i, err := strconv.ParseInt(s.Text(), 10, 32)
-		if err != nil {
-			panic(err)
-		}
-		arr[row] = append(arr[row], int32(i))
-	}
-
-}
 
 // HELPER: arr argument should be prealocated with make
 func readArray(s *bufio.Scanner, arr []int, N *int) {
@@ -52,14 +35,34 @@ func main() {
 	scan.Split(bufio.ScanWords)
 
 	//SAMPLE: read integer from stdin
-	N := readInt(scan)
-
+	n := readInt(scan)
+	page := readInt(scan)
 	//SAMPLE: read array from the input
-	arr := make([]int, N)
-	readArray(scan, arr, &N)
+	arr := make([]int, n)
+	readArray(scan, arr, &n)
 
-	// SAMPLE: read from stdin using fmt package
-	var a, b, res uint32
-	fmt.Scanf(\"%v\n%v\", &a, &b)
+	var curPage, magic int = 1, 0
+	for i := 0; i < n; i++ {
+
+		chapt := arr[i] / page
+		if arr[i]%page != 0 {
+			chapt++
+		}
+
+		start, end := 1, page
+		for j := 0; j < chapt; j++ {
+			start = 1 + j*page
+			end = page + j*page
+			if end > arr[i] {
+				end = arr[i]
+			}
+			if curPage >= start && curPage <= end {
+				magic++
+			}
+			curPage++
+
+		}
+	}
+	fmt.Println(magic)
 
 }
