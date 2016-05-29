@@ -24,7 +24,7 @@ Multiple -l options can be specified
 > $SCRNAME -l py -n 001_multiplies_of_3_and_5
 will create directory with templates for py solutions
 -   Add Java solution template for current problem
-> $SCRNAME -l java .
+> $SCRNAME -l java -n .
 
 USAGE
 exit 1
