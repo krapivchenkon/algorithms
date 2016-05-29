@@ -43,6 +43,7 @@ func readInt(s *bufio.Scanner) int {
 		panic(err)
 	}
 	return int(n)
+}
 
 func main() {
 
