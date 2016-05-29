@@ -1,34 +1,11 @@
 package main
 
 import (
-	\"bufio\"
-	\"fmt\"
-	\"os\"
-	\"strconv\"
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
 )
-
-const MaxUint = ^uint(0) 
-const MinUint = 0 
-const MaxInt = int(MaxUint >> 1) 
-const MinInt = -MaxInt - 1
-
-
-// HELPER: function reads 2-dimensional matrix into slice of slices
-func readMatrix(s *bufio.Scanner, arr [][]int32, N *int32) {
-	var row, ind int32 = -1, 0
-	for s.Scan() {
-		if ind%*N == 0 {
-			row++
-		}
-		ind++
-		i, err := strconv.ParseInt(s.Text(), 10, 32)
-		if err != nil {
-			panic(err)
-		}
-		arr[row] = append(arr[row], int32(i))
-	}
-
-}
 
 // HELPER: arr argument should be prealocated with make
 func readArray(s *bufio.Scanner, arr []int, N *int) {
@@ -51,11 +28,13 @@ func readInt(s *bufio.Scanner) int {
 	return int(n)
 }
 
-// HELPER: find min element in array
+const maxUint = ^uint(0)
+const maxInt = int(maxUint >> 1)
+
 func Min(arr []int) int {
 	min := maxInt
 	for _, v := range arr {
-		if v < min {
+		if v != 0 && v < min {
 			min = v
 		}
 	}
@@ -75,9 +54,21 @@ func main() {
 	//SAMPLE: read array from the input
 	arr := make([]int, N)
 	readArray(scan, arr, &N)
+	left := N
 
-	// SAMPLE: read from stdin using fmt package
-	var a, b, res uint32
-	fmt.Scanf(\"%v\n%v\", &a, &b)
+	for left > 0 {
+		fmt.Println(left)
+		min := Min(arr)
+		for i, v := range arr {
+			tmp := v - min
+			if tmp == 0 {
+				left--
+			}
+			if tmp >= 0 {
+
+				arr[i] = tmp
+			}
+		}
+	}
 
 }
