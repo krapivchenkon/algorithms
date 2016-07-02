@@ -63,6 +63,36 @@ func Min(arr []int) int {
 
 }
 
+func ShiftSliceLeft(A []int, K int) []int {
+	if len(A) == 0 {
+		return A
+	}
+	shift := K % len(A)
+	if shift == 0 {
+		return A
+	}
+	res := A[shift:]
+	for i, v := range A[:shift] {
+		res = append(res, v)
+	}
+	return res
+}
+
+func ShiftSliceRight(A []int, K int) []int {
+	if len(A) == 0 {
+		return A
+	}
+	shift := K % len(A)
+	if shift == 0 {
+		return A
+	}
+	res := A[len(A)-shift:]
+	for _, v := range A[:len(A)-shift] {
+		res = append(res, v)
+	}
+	return res
+}
+
 func main() {
 
 	// Setup bufio.Scanner
