@@ -30,6 +30,7 @@ Crucially, we must subtract what was counted twice and any degenerate solutions 
 
 # note 
 There exists O(n) solution
+https://stackoverflow.com/questions/4801242/algorithm-to-calculate-number-of-intersecting-discs/27549852
 
 ### Input Format 
 
